@@ -3,13 +3,16 @@
         <div class = "header" > 
     <div class = "left">
         <img :src = "img">
-         <input type = "search" placeholder="search"/>
-       <h3>{{title}}</h3>
+         <input type = "search" placeholder="search" ref="input"/>
+       <!-- <h3>{{title}}</h3> -->
     </div>
     <div class = "right">
-        <button class="button" @click="$emit('alert',title)" type="button">Cart</button>
-        <button class = "button" type="button">AddProduct</button>
-        <button class = "button1" type="button">ProductsList</button>
+        <div>{{cart.length}}</div>
+        <!-- <button class="button" @click="$emit('alert',title)" type="button">Cart</button> -->
+        <button class="button" @click="showCart" type="button">Cart </button>
+        
+        <!-- <button class = "button" type="button">AddProduct</button> -->
+        <button class = "button1" @click="productList" type="button">ProductsList</button>
     </div>
 </div>
     </div>

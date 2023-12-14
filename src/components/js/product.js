@@ -1,63 +1,53 @@
 import img from "@/assets/images/download.jpeg"
+import { mapActions, mapState, mapWritableState } from "pinia";
+import {productStore} from "../../stores/product.js";
+
 export default {
-    data(){
+  mounted () {
+    this.copyState();
+  },
+  props: {
     
-        return {
-          count : 0,
-          clicked : true,
-          // "logoImg" : logo,
-          size : '15px',
-          "Categories" : "Select the Categories",
-          "products" :[
-            {
-              "name" : "MOTO Edge 40 (Nebula Green, 256 GB) ", 
-              "img" : img,
-              "price" : 10000,
-            },
-            {
-              "name" : "MOTOROLA Edge 40 (Nebula Green, 256 GB)",
-              "img" : img,
-              "price" : 10000,
-            },
-            {
-              "name" : "MOTO Edge 40 (Nebula Green, 256 GB)  (8 GB RAM",
-              "img" : img,
-              "price" : 10000,
-            },
-            {
-              "name" : "MOTO Edge 40 (Nebula Green, 256 GB)  (8 GB RAM",
-              "img" : img,
-              "price" : 10000,
-            },
-            {
-              "name" : "MOTO Edge 40 (Nebula Green, 256 GB)  (8 GB RAM",
-              "img" : img,
-              "price" : 10000,
-            },
-            {
-              "name" : "MOTO Edge 40 (Nebula Green, 256 GB)  (8 GB RAM",
-              "img" : img,
-              "price" : 10000,
-            },
-            {
-              "name" : "MOTO Edge 40 (Nebula Green, 256 GB)  (8 GB RAM",
-              "img" : img,
-              "price" : 10000,
-            },
-            {
-              "name" : "MOTO Edge 40 (Nebula Green, 256 GB)  (8 GB RAM",
-              "img" : img,
-              "price" : 10000,
-            }
-          ],
-          checkedCategories : []
-          
-        }
+    selectedValue : String
+  },
+  data(){
+   
+    return {
+      count : 0,
+      clicked : true,
+      size : '15px',
+      
+      checkedCategories : []
+      
+    }
+  },
+  computed: {
+    ...mapState(productStore, [
+      "products","filteredProductsList","showAll","copyState"
+      // "cart"
+
+      
+    ]),
+    
+        
+
       },
-      computed: {
-        availableCount() {
-          return this.products.length;
-          }
-        }
+      methods : {
+        increment(index){
+           this.filteredProductsList[index].quantity += 1;
+        },
+        decrement(index){
+          this.filteredProductsList[index].quantity -= 1;
+        },
+
+        ...mapActions(productStore, [
+          "adding","remove"
+        ])
+
+      }
+      
+
+      
+
 
 }

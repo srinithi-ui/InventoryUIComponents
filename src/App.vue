@@ -1,18 +1,18 @@
 <template>
   <div>
     <div>
-      <headerComponent :title="example" @alert="show"></headerComponent>
-      
+      <headerComponent :title="'example'" ></headerComponent>
+      <!-- <headerComponent :title="'example'" @alert="show"></headerComponent> -->
     </div>
 
     <div class="main-container">
-      <div class="filter">
-        <filterComponent></filterComponent>
-      </div>
+      
+        <filterComponent ></filterComponent>
+     
 
-      <div class="products">
-        <productComponent></productComponent>
-      </div>
+      
+        <router-view></router-view>
+     
     </div>
   </div>
 </template>
@@ -35,15 +35,6 @@
 
 
 
-.products {
-  display: flex;
-  flex-flow: column;
-  overflow-x: scroll;
-  // border-style:solid;
-  width: 100%;
-  margin: 10px;
-  white-space: nowrap;
-}
 
  
 </style>

@@ -1,5 +1,4 @@
-import img from "@/assets/images/download.jpeg"
-import logo from "@/assets/images/quinbay.jpeg"
+
 import headerComponent from "@/components/Header.vue"
 import filterComponent from "@/components/FilterComponent.vue"
 import productComponent from "@/components/ProductComponent.vue"
@@ -12,7 +11,7 @@ export default{
   data(){
     
     return {
-      example : "examplesend",
+      // example : "examplesendno",
       count : 0,
       clicked : true,
       // "logoImg" : logo,
@@ -22,11 +21,11 @@ export default{
     }
   },
   
-    methods: {
-      show(title){
-        alert(title);
-      }
-    }
+    // methods: {
+    //   show(title){
+    //     alert(title);
+    //   }
+    // }
 
   }
 
