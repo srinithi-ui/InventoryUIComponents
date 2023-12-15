@@ -8,6 +8,8 @@ import { app, pages } from '@/config'
 import productComponent from "@/components/ProductComponent.vue"
 import filterComponent from "@/components/FilterComponent.vue"
 import CartPage from '@/pages/CartPage.vue';
+import addProductsPage from '@/pages/AddProducts.vue';
+import updateProductPage from '@/pages/UpdateProductPage.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -20,6 +22,17 @@ const router = createRouter({
       path: '/cart',
       name: "CartPage",
       component: CartPage
+    },
+    {
+      path : '/addProducts',
+      name : "addProductsPage",
+      component : addProductsPage
+    },
+    {
+      path : "/product/update/:id",
+      name : "product",
+      component : updateProductPage
+
     }
    
   ]

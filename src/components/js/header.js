@@ -29,6 +29,9 @@ export default{
         },
         productList(){
             this.$router.push("/");
+        },
+        addProducts(){
+            this.$router.push("/addProducts")
         }
     }
 }

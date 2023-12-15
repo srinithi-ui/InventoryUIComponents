@@ -8,12 +8,9 @@
       <!-- <div>{{title1}}</div> -->
       <div v-for="(category, index) in categories" :key="index">
         
-        <input type="radio" v-model="selectedValue"  :value = "category" name="category" />
-        {{category}}
+        <input type="radio" v-model="selectedValue" @click="selecting" :value = "category" name="category" />
+        {{index}}
         </div>
-        
-        <!-- <productComponent :selected-value="selectedValue"/> -->
-    
     </div>
     <br>
     <div class="clear-filters">

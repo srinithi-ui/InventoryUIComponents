@@ -10,85 +10,27 @@ import mobile2 from "@/assets/images/mobile2.jpeg"
 import mobile3 from "@/assets/images/mobile3.jpeg"
 import mobile4 from "@/assets/images/mobile4.jpeg"
 import mobile5 from "@/assets/images/mobile5.jpeg"
+import productService from '../services/product-service.js'
 
 export const productStore = defineStore("product", {
     id : 'api-product',
     state : () => ({
-        "products" :[
-            {
-              "name" : "BEAUTY 1 ", 
-              "img" : beauty1,
-              "price" : 10000,
-              "quantity" : 0,
-              "category" : "Beauty"
-            },
-            {
-              "name" : "BEAUTY 2",
-              "img" : beauty2,
-              "price" : 10000,
-              "quantity" : 10,
-              "category" : "Beauty"
-            },
-            {
-              "name" : "BEAUTY 3",
-              "img" : beauty3,
-              "price" : 10000,
-              "quantity" : 0,
-              "category" : "Beauty"
-            },
-            {
-              "name" : "BEAUTY 4",
-              "img" : beauty4,
-              "price" : 10000,
-              "quantity" : 0,
-              "category" : "Beauty"
-            },
-            {
-              "name" : "BEAUTY 5",
-              "img" : beauty5,
-              "price" : 10000,
-              "quantity" : 0,
-              "category" : "Beauty"
-            },
-            {
-              "name" : "MOBILE 1",
-              "img" : mobile1,
-              "price" : 10000,
-              "quantity" : 0,
-              "category" : "Mobile"
-            },
-            {
-              "name" : "MOBILE 2",
-              "img" : mobile2,
-              "price" : 10000,
-              "quantity" : 0,
-              "category" : "Mobile"
-            },
-            {
-              "name" : "MOBILE 3",
-              "img" : mobile3,
-              "price" : 10000,
-              "quantity" : 0,
-              "category" : "Mobile"
-            },
-            {
-                "name" : "MOBILE 4",
-                "img" : mobile4,
-                "price" : 10000,
-                "quantity" : 0,
-                "category" : "Mobile"
-              },
-              {
-                "name" : "MOBILE 5",
-                "img" : mobile5,
-                "price" : 10000,
-                "quantity" : 0,
-                "category" : "Mobile"
-              }
+        
+          cart : [
           ],
-          "cart" : [
-          ],
-          "filteredProductsList" : [],
+          showProducts : true,
+          
+          filteredProductsList : [],
+          list:[],//getting all products from server
+          image : beauty1,
+          // "addProducts" : [],
+          categories : {
+                "Electronics" : 1,
+               "Mobiles" : 2,
+              "Fashion" : 3,
+              "Stationary" : 4
+          }
+          
           
 
           
@@ -104,19 +46,62 @@ export const productStore = defineStore("product", {
             console.log(this.cart);
             this.cart = [];
         },
-        filterProductStoreByCategory(category){
+        filterProductStoreByCategory(categoryId){
+          console.log("category"+categoryId)
+          
+          this.filteredProductsList = this.list.filter(product => product.category.id === categoryId);
           console.log(this.filteredProductsList)
-          this.filteredProductsList=this.products.filter((product)=>product.category===category);
+          console.log("done")
           
 
         },
         copyState() {
-          this.filteredProductsList = JSON.parse(JSON.stringify(this.products));
+          this.filteredProductsList = this.list;
           console.log(this.filteredProductsList);
         },
-        remove(){
-          this.filteredProductsList = this.products;
-        }
+        // remove(){
+        //   this.filteredProductsList = this.list;
+        // },
+        showProductsFunc(){
+          console.log(this.showProducts)
+          this.copyState();
+          this.showProducts = false
+        },
+        get_all_products(){
+          // console.log("work");
+          const data = productService.getAllProducts();
+          console.log(data);
+
+          data.then((products)=>{
+              products.json().then(productsData=>{
+                  // console.log(typeof(productsData));
+                  this.list = productsData;
+                  console.log(this.list);
+              })
+          })
+      },
+      async CREATE_ORDER(orderDetails){
+        const payload = orderDetails.payload
+        const createOrderResponse = await productService.createOrder(payload)
+        const data = await createOrderResponse.json();
+
+      },
+
+      async ADD_ORDER(addDetails){
+        // const payload = addDetails.payload;
+        console.log(addDetails);
+        // console.log(payload);
+        const addOrderResponse = await productService.addOrder(addDetails)
+        // const data = await addOrderResponse.json();
+
+      },
+
+      async UPDATE_ORDER(updateDetails){
+        console.log(updateDetails);
+        const addOrderResponse = await productService.updateOrder(updateDetails,updateDetails.id)
+        // const data = await addOrderResponse.json();
+
+      }
        
 
         

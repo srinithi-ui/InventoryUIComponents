@@ -8,9 +8,6 @@
     <div class="main-container">
       
         <filterComponent ></filterComponent>
-     
-
-      
         <router-view></router-view>
      
     </div>

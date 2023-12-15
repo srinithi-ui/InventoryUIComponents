@@ -9,15 +9,29 @@ export default{
     },
     computed : {
         ...mapState(productStore,[
-            "cart"
+            "cart","image"
         ]),
         ...mapWritableState(productStore, ["cart"])
     },
     methods : {
        
         ...mapActions(productStore, [
-            "clearCart"
+            "clearCart","CREATE_ORDER"
           ])
+    },
+    mounted(){
+        console.log(this.cart)
+        const cartRequest = {
+            id:this.cart[0].id,
+            quantity:this.cart[0].quantity,
+            customerId : 3
+        }
+        
+        const actions = {
+            "payload" : cartRequest
+        }
+        this.CREATE_ORDER(actions)
+
     }
 
     

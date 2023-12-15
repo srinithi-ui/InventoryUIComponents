@@ -10,7 +10,7 @@
         <div>{{cart.length}}</div>
         <!-- <button class="button" @click="$emit('alert',title)" type="button">Cart</button> -->
         <button class="button" @click="showCart" type="button">Cart </button>
-        
+        <button class = "button" @click = "addProducts" type="button">Add Products</button>
         <!-- <button class = "button" type="button">AddProduct</button> -->
         <button class = "button1" @click="productList" type="button">ProductsList</button>
     </div>

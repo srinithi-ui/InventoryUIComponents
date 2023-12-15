@@ -2,11 +2,13 @@
 import headerComponent from "@/components/Header.vue"
 import filterComponent from "@/components/FilterComponent.vue"
 import productComponent from "@/components/ProductComponent.vue"
+// import exampleComponent from "@/components/example.vue"
 export default{
   components:{
     headerComponent,
     filterComponent,
-    productComponent
+    productComponent,
+    // exampleComponent
   },
   data(){
     
@@ -21,11 +23,6 @@ export default{
     }
   },
   
-    // methods: {
-    //   show(title){
-    //     alert(title);
-    //   }
-    // }
 
   }
 

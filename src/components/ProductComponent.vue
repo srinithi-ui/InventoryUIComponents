@@ -13,10 +13,44 @@
         <div class="products-container1">
           
           
-         
-          <div v-for="(product, index) in filteredProductsList" :key="index">
+         <div class = "products-block" v-if="showProducts">
+          <div  v-for="(product, index) in list" :key="index">
             <div class="inside">
-              <img class="pimg" :src="product.img" />
+              <img class="pimg" :src="image" />
+              <div class="text">
+                <p>{{ product.name }}</p>
+                <br />
+                <p>PRICE : {{ product.price }}</p>
+                <!-- <p v-if="clicked">{{ "Product Added: " + count }}</p> -->
+                
+                <button v-on:click="increment(index)">+</button>
+                <h3>{{ count }}</h3>
+                <button v-on:click="decrement(index)">-</button>
+                <br><br>
+                <button
+                  v-on:click="adding(product)"
+                  id="cart"
+                  v-bind:style="{ fontSize: size }"
+                >
+                  ADD TO CART
+                </button>
+                <br><br>
+                <button 
+                  v-on:click="update(product.id)"
+                  id="cart"
+                  v-bind:style="{ fontSize: size }"
+                >
+                 UPDATE PRODUCT
+                </button>
+                <p id="cart"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class = "products-block" v-else>
+          <div  v-for="(product, index) in filteredProductsList" :key="index">
+            <div class="inside">
+              <img class="pimg" :src="image" />
               <div class="text">
                 <p>{{ product.name }}</p>
                 <br />
@@ -41,6 +75,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 <script src="./js/product.js"></script>
@@ -101,6 +136,9 @@
 .images{
   display: flex;
   border: 4px ;
+}
+.products-block{
+  display: flex;
 }
 .products-container2 {
   display: flex;
