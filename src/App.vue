@@ -5,9 +5,15 @@
       <!-- <headerComponent :title="'example'" @alert="show"></headerComponent> -->
     </div>
 
-    <div class="main-container">
+    <div class="main-container" v-if="showFilter">
       
         <filterComponent ></filterComponent>
+        <router-view></router-view>
+     
+    </div>
+    <div class="main-container" v-else>
+      
+        
         <router-view></router-view>
      
     </div>

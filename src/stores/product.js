@@ -19,17 +19,19 @@ export const productStore = defineStore("product", {
           cart : [
           ],
           showProducts : true,
-          
-          filteredProductsList : [],
+          showFilter : true,
+          filteredProductsList : [],//filtering based on filter component
           list:[],//getting all products from server
-          image : beauty1,
-          // "addProducts" : [],
+          image : beauty2,
+          currentUpdate: [],
+          check : true,
           categories : {
                 "Electronics" : 1,
                "Mobiles" : 2,
               "Fashion" : 3,
               "Stationary" : 4
-          }
+          },
+          searchQuery : ''
           
           
 
@@ -38,13 +40,16 @@ export const productStore = defineStore("product", {
     actions : {
         adding(product) {
            // console.log(product);
-            if(product.quantity > 0 ) this.cart.push(product);
-            else alert("Choose one product")
+             this.cart.push(product);
+            // else alert("Choose one product")
+            alert("Product Added to cart")
+            console.log(this.cart);
             console.log(this.cart.length);
         },
-        clearCart(){
-            console.log(this.cart);
-            this.cart = [];
+        clearCart(id){
+            console.log(id);
+            this.cart = this.cart.filter(product => product.id !== id)
+            
         },
         filterProductStoreByCategory(categoryId){
           console.log("category"+categoryId)
@@ -59,13 +64,25 @@ export const productStore = defineStore("product", {
           this.filteredProductsList = this.list;
           console.log(this.filteredProductsList);
         },
-        // remove(){
-        //   this.filteredProductsList = this.list;
-        // },
+        remove(){
+          this.showProducts = true;
+         
+        },
+        setFilterTrue(){
+          this.showFilter = true;
+        },
+        setFilterFalse(){
+          this.showFilter = false;
+        },
         showProductsFunc(){
           console.log(this.showProducts)
           this.copyState();
           this.showProducts = false
+        },
+        
+        filterProductsBySearch(searchQuery){
+          console.log(searchQuery)
+            this.list.filter(product => product.name.toLowerCase().startsWith(searchQuery.toLowerCase()))
         },
         get_all_products(){
           // console.log("work");
@@ -88,9 +105,7 @@ export const productStore = defineStore("product", {
       },
 
       async ADD_ORDER(addDetails){
-        // const payload = addDetails.payload;
         console.log(addDetails);
-        // console.log(payload);
         const addOrderResponse = await productService.addOrder(addDetails)
         // const data = await addOrderResponse.json();
 
@@ -100,12 +115,26 @@ export const productStore = defineStore("product", {
         console.log(updateDetails);
         const addOrderResponse = await productService.updateOrder(updateDetails,updateDetails.id)
         // const data = await addOrderResponse.json();
+          
+      },
 
+       GET_PRODUCT_BY_NAME(name){
+        // console.log(name);
+        const data =  productService.getProductByName(name)
+        data.then((products)=>{
+          products.json().then(productsData=>{
+             
+              this.currentUpdate = productsData[0];
+              // console.log(this.currentUpdate);
+          })
+      })
+        
       }
        
 
         
     
-    }
+    },
+    
 
 })

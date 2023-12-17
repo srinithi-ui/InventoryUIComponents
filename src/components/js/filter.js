@@ -25,7 +25,7 @@ export default{
         selectedValue: {
             
           handler(category) {
-            // this.showProductsFunc(),
+           
               console.log(this.filteredProductsList) 
             this.filterProductStoreByCategory(category);
             console.log("watch category: ", category);

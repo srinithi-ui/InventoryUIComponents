@@ -31,10 +31,13 @@ export default{
                 id : this.selectCategory
             }
             }
+            
             // console.log(this.selectCategory)
             // console.log(addproducts)
             
             this.ADD_ORDER(addproducts)
+            alert("Product addded");
+            
             
         }
     }

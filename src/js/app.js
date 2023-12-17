@@ -2,7 +2,9 @@
 import headerComponent from "@/components/Header.vue"
 import filterComponent from "@/components/FilterComponent.vue"
 import productComponent from "@/components/ProductComponent.vue"
-// import exampleComponent from "@/components/example.vue"
+import { mapActions, mapState, mapWritableState } from "pinia";
+import {productStore} from "../stores/product.js";
+
 export default{
   components:{
     headerComponent,
@@ -22,6 +24,11 @@ export default{
       
     }
   },
+  computed : {
+    ...mapState(productStore,[
+        "showFilter"
+    ]),
+  }
   
 
   }

@@ -3,15 +3,14 @@ import { mapActions, mapState, mapWritableState } from "pinia";
 import {productStore} from "../../stores/product.js";
 
 export default{
-    mounted(){
-        console.log(this.$refs.input.focus())
-    },
+    
     
 
     props : ['title'],
     emits : ['alert'],
     data(){
        return{
+        searchQuery : null,
         img : logo
       
        }
@@ -19,19 +18,42 @@ export default{
     computed: {
         ...mapState(productStore, [
           "products",
-          "cart"
+          "cart",
+          "setFilterTrue",
+          "setFilterFalse",
+          "remove",
+          "list",
+          "filterProductsBySearch"
         ]),
+    },
+    watch:{
+        searchQuery : {
+            handler(search){
+                // console.log(search)
+            // if(search.length > 0 ) this.list = this.list.filter(product => product.name.toLowerCase().startsWith(search.toLowerCase()))
+                
+                this.filterProductsBySearch(search)
+            }
+        },
+
     },
     methods:{
         showCart(){
-            console.log(cart);
+            this.setFilterFalse();
+            console.log(this.showFilter+"dw");
             this.$router.push("/cart");
+            console.log(cart);
+           
         },
         productList(){
+            this.setFilterTrue();
             this.$router.push("/");
         },
         addProducts(){
+            this.setFilterFalse();
+           
             this.$router.push("/addProducts")
+            
         }
     }
 }

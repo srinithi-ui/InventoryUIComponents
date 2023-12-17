@@ -3,11 +3,8 @@ import { mapActions, mapState, mapWritableState } from "pinia";
 import {productStore} from "../../stores/product.js";
 import productService from '../../services/product-service.js'
 
-
 export default {
-  // mounted () {
-  //   this.copyState();
-  // },
+  
   props: {
     
     selectedValue : String
@@ -25,17 +22,26 @@ export default {
   },
   methods : {
     increment(index){
-      //  this.list[index].quantity += 1;
+       this.list[index].quantity += 1;
       this.count++;
     },
     decrement(index){
-      // this.list[index].quantity -= 1;
+      this.list[index].quantity -= 1;
       this.count--;
     },
-    update(id){
+    incrementfList(index){
+      this.filteredProductsList[index].quantity += 1;
+     this.count++;
+   },
+   decrementfList(index){
+     this.filteredProductsList[index].quantity -= 1;
+     this.count--;
+   },
+    update(id,name){
       console.log(id);
-      this.$router.push({name:'product',params: {id}});
+      this.$router.push({name:'product',params: {name}});
     },
+    
 
     ...mapActions(productStore, [
       "adding","remove","get_all_products","copyState"
@@ -44,7 +50,7 @@ export default {
   },
   mounted(){
     this.get_all_products()
-    console.log("DD"+this.showProducts)
+    // console.log("DD"+this.showProducts)
     // this.copyState()
   },
   

@@ -12,16 +12,17 @@ export default{
         }
     },
     mounted(){
-        this.id = this.$route.params.id;
-
+        this.name = this.$route.params.name;
+        this.GET_PRODUCT_BY_NAME(this.name);
+        console.log(this.currentUpdate)
         
     },
     computed : {
-        ...mapState(productStore,["addProducts","categories"])
+        ...mapState(productStore,["addProducts","categories","filteredProductsList","currentUpdate"])
     },
     methods : {
         ...mapActions(productStore,[
-            "UPDATE_ORDER"
+            "UPDATE_ORDER","GET_PRODUCT_BY_NAME"
         ]),
         updateProductButton(){
             // alert("d")
@@ -35,10 +36,8 @@ export default{
                 id : 1
             }
             }
-            // console.log(this.selectCategory)
-            // console.log(addproducts)
-            
             this.UPDATE_ORDER(addproducts)
+            alert("Product updated")
             
         }
     }

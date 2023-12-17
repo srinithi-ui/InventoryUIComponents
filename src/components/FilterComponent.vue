@@ -1,39 +1,57 @@
 <template>
 
-  <div class="filter">
-    <div>
+  <div class="filter-panel">
+    
       <h2>Filters</h2>
-    </div>
+      <br><br>
+    
     <div>
-      <!-- <div>{{title1}}</div> -->
-      <div v-for="(category, index) in categories" :key="index">
+      
+      <div style="width:100px" v-for="(category, index) in categories" :key="index">
         
         <input type="radio" v-model="selectedValue" @click="selecting" :value = "category" name="category" />
         {{index}}
         </div>
     </div>
     <br>
-    <div class="clear-filters">
-      <button  @click="remove">Clear filters</button>
-    </div>
+    
+      <button class="button" @click="remove">Clear filters</button>
+   
   </div>
 </template>
 <script src="./js/filter.js"></script>
 <style scoped>
-.filter {
-  padding-left: 10px;
-  width : 200px;
-  padding-top: 80px;
-  display: block;
-  background-color: whitesmoke;
-    margin-top: 70px;
-    padding-right: 50px;
-}
-.main-page{
-  display: flex;
+/* Reset some default styles */
+ h2, p, input, button {
+  margin: 0;
+  padding: 0;
 }
 
-.categories {
-  background-color: whitesmoke;
+
+
+.filter-panel {
+  width: 200px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 50px;
+}
+
+
+input[type="radio"] {
+  margin-bottom: 10px;
+}
+
+.button {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #050709;
 }
 </style>

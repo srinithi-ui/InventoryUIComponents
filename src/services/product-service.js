@@ -35,9 +35,14 @@ const updateOrder = (updateDetails, id) => {
         mode:'cors'
     })
 }
+const getProductByName = (name) => {
+    return fetch("http://localhost:8098/httpmethod/product/name/"+name)
+}
+
 export default {
     getAllProducts,
     createOrder,
     addOrder,
-    updateOrder
+    updateOrder,
+    getProductByName
 }

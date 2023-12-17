@@ -3,16 +3,19 @@
         <div class = "header" > 
     <div class = "left">
         <img :src = "img">
-         <input type = "search" placeholder="search" ref="input"/>
+         <input  type = "search"  v-model="searchQuery" placeholder="search" @input="search"/>
        <!-- <h3>{{title}}</h3> -->
     </div>
     <div class = "right">
         <div>{{cart.length}}</div>
-        <!-- <button class="button" @click="$emit('alert',title)" type="button">Cart</button> -->
-        <button class="button" @click="showCart" type="button">Cart </button>
+        <!-- <i class="fas fa-shopping-cart"></i>  -->
+        <button class="button" @click="showCart" type="button" >CART </button>
+
         <button class = "button" @click = "addProducts" type="button">Add Products</button>
-        <!-- <button class = "button" type="button">AddProduct</button> -->
-        <button class = "button1" @click="productList" type="button">ProductsList</button>
+        <form action="/">
+        <button class = "button" @click="productList" type="button" >ProductsList</button>
+       
+        </form>
     </div>
 </div>
     </div>
@@ -21,11 +24,12 @@
 
 </script>
 <style scoped>
+
 .header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-style: solid;
+    /* border-style: solid; */
  
 }
 .left{
@@ -41,6 +45,13 @@ img{
     height: 40%;
 }
 
+.search-bar {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 
 
  .right{
@@ -48,6 +59,20 @@ img{
     align-items: center;
     justify-content: space-between;
 }
+.button {
+  background-color: #3498db;
+ color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #050709;
+}
+
 
 
 </style>
